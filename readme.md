@@ -25,4 +25,9 @@ el número estimado de episodios y la fuente (manga, novela, etc.), el regresor 
 
 ## Referencias
 Los datos usados para el dataset provienen de MyAnimeList
+- https://www.kaggle.com/azathoth42/myanimelist#anime_filtered.csv
+- https://www.kaggle.com/azathoth42/myanimelist#anime_cleaned.csv
+- https://www.kaggle.com/CooperUnion/anime-recommendations-database
+- https://myanimelist.net/
+
 <p align="center"><img src="https://image4.owler.com/logo/myanimelist_owler_20160226_213523_original.png" width="342" heigth="166"></p>

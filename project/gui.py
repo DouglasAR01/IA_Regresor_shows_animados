@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
+from core import CoreRegressors
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -23,6 +24,11 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
+
+    def __init__(self):
+        self.regressors = CoreRegressors()
+        self.genres = []
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(500, 500)
@@ -85,21 +91,63 @@ class Ui_MainWindow(object):
         self.g17 = QtGui.QCheckBox(self.groupBox)
         self.g17.setGeometry(QtCore.QRect(110, 250, 70, 17))
         self.g17.setObjectName(_fromUtf8("g17"))
+        self.genres.append(self.g1)
+        self.genres.append(self.g2)
+        self.genres.append(self.g3)
+        self.genres.append(self.g4)
+        self.genres.append(self.g5)
+        self.genres.append(self.g6)
+        self.genres.append(self.g7)
+        self.genres.append(self.g8)
+        self.genres.append(self.g9)
+        self.genres.append(self.g10)
+        self.genres.append(self.g11)
+        self.genres.append(self.g12)
+        self.genres.append(self.g13)
+        self.genres.append(self.g14)
+        self.genres.append(self.g15)
+        self.genres.append(self.g16)
+        self.genres.append(self.g17)
+
         self.groupBox_2 = QtGui.QGroupBox(self.centralwidget)
         self.groupBox_2.setGeometry(QtCore.QRect(325, 200, 155, 200))
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
+
         self.lbl_type = QtGui.QLabel(self.groupBox_2)
         self.lbl_type.setGeometry(QtCore.QRect(20, 20, 46, 13))
         self.lbl_type.setObjectName(_fromUtf8("lbl_type"))
         self.cb_types = QtGui.QComboBox(self.groupBox_2)
         self.cb_types.setGeometry(QtCore.QRect(20, 40, 115, 22))
         self.cb_types.setObjectName(_fromUtf8("cb_types"))
+        self.cb_types.addItem("Movie")
+        self.cb_types.addItem("Music")
+        self.cb_types.addItem("ONA")
+        self.cb_types.addItem("OVA")
+        self.cb_types.addItem("Special")
+        self.cb_types.addItem("TV")
+
         self.lbl_source = QtGui.QLabel(self.groupBox_2)
         self.lbl_source.setGeometry(QtCore.QRect(20, 80, 46, 13))
         self.lbl_source.setObjectName(_fromUtf8("lbl_source"))
         self.cb_sources = QtGui.QComboBox(self.groupBox_2)
         self.cb_sources.setGeometry(QtCore.QRect(20, 100, 115, 22))
         self.cb_sources.setObjectName(_fromUtf8("cb_sources"))
+        self.cb_sources.addItem("4-Koma manga")
+        self.cb_sources.addItem("Book")
+        self.cb_sources.addItem("Card game")
+        self.cb_sources.addItem("Digital manga")
+        self.cb_sources.addItem("Game")
+        self.cb_sources.addItem("Light novel")
+        self.cb_sources.addItem("Manga")
+        self.cb_sources.addItem("Music")
+        self.cb_sources.addItem("Novel")
+        self.cb_sources.addItem("Original")
+        self.cb_sources.addItem("Other")
+        self.cb_sources.addItem("Picture book")
+        self.cb_sources.addItem("Radio")
+        self.cb_sources.addItem("Visual novel")
+        self.cb_sources.addItem("Web manga")
+
         self.groupBox_3 = QtGui.QGroupBox(self.centralwidget)
         self.groupBox_3.setGeometry(QtCore.QRect(20, 100, 460, 100))
         self.groupBox_3.setObjectName(_fromUtf8("groupBox_3"))
@@ -144,34 +192,27 @@ class Ui_MainWindow(object):
 
         #LOGICA DE LAS CONEXIONES
         self.clear.clicked.connect(lambda: self.Clear())
+        self.predict.clicked.connect(lambda: self.Predict())
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+    def Predict(self):
+        X = [2018,self.cb_types.currentIndex(),self.cb_sources.currentIndex()]
+        import numpy as np
+        for checkbox_widget in self.genres:
+            X.append(1 if checkbox_widget.isChecked() else 0)
+        res = self.regressors.BGR_predict(np.array(X).reshape(1,-1))
+        print res
+        #self.tbx_popularity.setText(res[0])
+        #self.tbx_favorites.setText(res[1])
+        #self.tbx_score.setText(res[2])
     def Clear(self):
-        genres = [
-            self.g1,
-            self.g2,
-            self.g3,
-            self.g4,
-            self.g5,
-            self.g6,
-            self.g7,
-            self.g8,
-            self.g9,
-            self.g10,
-            self.g11,
-            self.g12,
-            self.g13,
-            self.g14,
-            self.g15,
-            self.g16,
-            self.g17,
-        ]
-        for checkbox_widget in genres:
+        for checkbox_widget in self.genres:
             if checkbox_widget.isChecked():
                 checkbox_widget.click()
         self.tbx_popularity.setText('0')
         self.tbx_favorites.setText('0')
         self.tbx_score.setText('0')
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Anime Genie", None))
         self.groupBox.setTitle(_translate("MainWindow", "Genres", None))

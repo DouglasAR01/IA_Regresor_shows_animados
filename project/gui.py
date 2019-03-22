@@ -187,7 +187,15 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
-
+        self.lbl_date = QtGui.QLabel(self.groupBox_2)
+        self.lbl_date.setGeometry(QtCore.QRect(20, 140, 115, 13))
+        self.lbl_date.setObjectName(_fromUtf8("lbl_date"))
+        self.spb_date = QtGui.QSpinBox(self.groupBox_2)
+        self.spb_date.setGeometry(QtCore.QRect(20, 160, 115, 22))
+        self.spb_date.setObjectName(_fromUtf8("date"))
+        self.spb_date.setMinimum(1942)
+        self.spb_date.setMaximum(2018)
+        self.spb_date.setValue(2018)
         self.retranslateUi(MainWindow)
 
         #LOGICA DE LAS CONEXIONES
@@ -196,15 +204,15 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def Predict(self):
-        X = [2018,self.cb_types.currentIndex(),self.cb_sources.currentIndex()]
+        X = [self.spb_date.value(),self.cb_types.currentIndex(),self.cb_sources.currentIndex()]
         import numpy as np
         for checkbox_widget in self.genres:
             X.append(1 if checkbox_widget.isChecked() else 0)
         res = self.regressors.BGR_predict(np.array(X).reshape(1,-1))
-        print res
-        #self.tbx_popularity.setText(res[0])
-        #self.tbx_favorites.setText(res[1])
-        #self.tbx_score.setText(res[2])
+        self.tbx_popularity.setText(str(np.abs(int(res[0,0]))))
+        self.tbx_score.setText(str(np.abs(res[0,1].round(2))))
+        self.tbx_favorites.setText(str(np.abs(int(res[0,2]))))
+
     def Clear(self):
         for checkbox_widget in self.genres:
             if checkbox_widget.isChecked():
@@ -236,6 +244,7 @@ class Ui_MainWindow(object):
         self.groupBox_2.setTitle(_translate("MainWindow", "Aditional parameters", None))
         self.lbl_type.setText(_translate("MainWindow", "Type", None))
         self.lbl_source.setText(_translate("MainWindow", "Source", None))
+        self.lbl_date.setText(_translate("MainWindow", "Predict based on year:", None))
         self.groupBox_3.setTitle(_translate("MainWindow", "Results", None))
         self.lbl_popularity.setText(_translate("MainWindow", "Popularity", None))
         self.lbl_score.setText(_translate("MainWindow", "Score", None))

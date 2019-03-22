@@ -1,69 +1,42 @@
 import pandas as pd
 import numpy as np
 
-class source_num:
+class atype_num:
     def __init__(self):
         self.res = 'nan'
-    def komaManga(self):
+    def movie(self):
         self.res = 0
-    def book(self):
-        self.res = 1
-    def cardGame(self):
-        self.res = 2
-    def digitalManga(self):
-        self.res = 3
-    def game(self):
-        self.res = 4
-    def lightNovel(self):
-        self.res = 5
-    def manga(self):
-        self.res = 6
     def music(self):
-        self.res = 7
-    def novel(self):
-        self.res = 8
-    def original(self):
-        self.res = 9
-    def other(self):
-        self.res = 10
-    def pictureBook(self):
-        self.res = 11
-    def radio(self):
-        self.res = 12
-    def visualNovel(self):
-        self.res = 13
-    def webManga(self):
-        self.res = 14
+        self.res = 1
+    def ona(self):
+        self.res = 2
+    def ova(self):
+        self.res = 3
+    def special(self):
+        self.res = 4
+    def tv(self):
+        self.res = 5
     def otro(self):
-        self.res = 15
+        self.res = 6
     def getRes(self):
         return self.res
 
-def source_parser(source):
-    sw = source_num()
+def atype_parser(atype):
+    sw = atype_num()
     switcher={
-        '4-Koma manga': sw.komaManga,
-        'Book': sw.book,
-        'Card game': sw.cardGame,
-        'Digital manga': sw.digitalManga,
-        'Game': sw.game,
-        'Light novel': sw.lightNovel,
-        'Manga': sw.manga,
+        'Movie': sw.movie,
         'Music': sw.music,
-        'Novel': sw.novel,
-        'Original': sw.original,
-        'Other': sw.other,
-        'Picture book': sw.pictureBook,
-        'Radio': sw.radio,
-        'Visual novel': sw.visualNovel,
-        'Web manga': sw.webManga
+        'ONA': sw.ona,
+        'OVA': sw.ova,
+        'Special': sw.special,
+        'TV': sw.tv
     }
-    func=switcher.get(source, sw.otro)
+    func=switcher.get(atype, sw.otro)
 
     return func(), sw.getRes()
 
-a = 'Visual novel'
+a = 'Music'
 
-swi = source_num()
+swi = atype_num()
 
-print source_parser(a)[1]
+print atype_parser(a)[1]

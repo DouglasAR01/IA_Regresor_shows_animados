@@ -196,6 +196,11 @@ class Ui_MainWindow(object):
         self.spb_date.setMinimum(1942)
         self.spb_date.setMaximum(2018)
         self.spb_date.setValue(2018)
+        banner = QtGui.QPixmap('../data/other/MiniBanner.png')
+        self.image = QtGui.QLabel(self.centralwidget)
+        self.image.setPixmap(banner)
+        self.image.setGeometry(QtCore.QRect(20, 5, 460, 90))
+        self.image.show()
         self.retranslateUi(MainWindow)
 
         #LOGICA DE LAS CONEXIONES

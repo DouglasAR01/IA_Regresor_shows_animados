@@ -1,3 +1,4 @@
+<p align="center"><img src="./data/other/ProjectBanner.png"></p>
 # Estimador de popularidad de shows animados
 **Presentado por:**
 - Douglas Andrés Ramírez Brujes
@@ -36,20 +37,20 @@ Autor: <a href="https://github.com/racinmat/mal-analysis">Racinmat</a>
 
 Finalmente, los grupos de géneros resultantes son los mostrados a continuación:
 - Romance
-- Ecchi
-- Shounen
-- Fantasy
-- Comedy
+- Shoujo
 - Sports
-- Hentai
-- Historical
-- Mistery
-- Thriller
-- Supernatural
-- Gore
 - Sci-Fi
 - Action
-- Otro
+- Shounen
+- Comedy
+- Fantasy
+- Music
+- Supernatural
+- Gore
+- Historical
+- Thriller
+- Mistery
+- Hentai
 
 ## Objetivo
 El objetivo del proyecto es, al pasarse una tupla de datos que contenga los géneros del show,

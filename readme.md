@@ -1,5 +1,7 @@
 <p align="center"><img src="./data/other/ProjectBanner.png"></p>
+
 # Estimador de popularidad de shows animados
+
 **Presentado por:**
 - Douglas Andrés Ramírez Brujes
 - Marianne Solangel Rojas Robles
